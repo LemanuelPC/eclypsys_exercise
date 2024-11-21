@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>authenticate</methodName>
+  <params>
+    <param>
+      <value><string>rochat_test</string></value>
+    </param>
+    <param>
+      <value><string>admin@eclypsys.ch</string></value>
+    </param>
+    <param>
+      <value><string>mU"6f.Y>8T)HUkE</string></value>
+    </param>
+    <param>
+      <value><struct /></value>
+    </param>
+  </params>
+</methodCall>
