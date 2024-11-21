@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { parseStringPromise } from 'xml2js';  // Import the XML parser
+import xmlrpc from 'xmlrpc';
 
 // Define Odoo connection parameters
 const url = 'https://lab.rochatindustrie.ch/xmlrpc/2/';
@@ -7,196 +6,112 @@ const db = 'rochat_test';
 const username = 'admin@eclypsys.ch';
 const password = 'mU"6f.Y>8T)HUkE';
 
-// Function to authenticate with Odoo using Axios
+// Create XML-RPC clients for common and object endpoints
+const commonClient = xmlrpc.createClient({ url: `${url}common` });
+const objectClient = xmlrpc.createClient({ url: `${url}object` });
+
+// Function to check the server version
+export async function checkServerVersion() {
+  return new Promise((resolve, reject) => {
+    commonClient.methodCall('version', [], (error, versionInfo) => {
+      if (error) {
+        console.error('Version Check Error:', error);
+        reject(`Failed to check server version: ${error.message}`);
+      } else {
+        console.log('Server Version Information:', versionInfo);
+        resolve(versionInfo);
+      }
+    });
+  });
+}
+
+// Function to authenticate with Odoo
 export async function authenticate() {
-    const xmlRequest = `<?xml version="1.0"?>
-<methodCall>
-  <methodName>authenticate</methodName>
-  <params>
-    <param><value><string>${db}</string></value></param>
-    <param><value><string>${username}</string></value></param>
-    <param><value><string>${password}</string></value></param>
-    <param><value><struct /></value></param>
-  </params>
-</methodCall>`;
-
-    try {
-        const response = await axios.post(`${url}common`, xmlRequest, {
-            headers: {
-                'Content-Type': 'text/xml',
-            },
-        });
-
-        const responseData = response.data;
-
-        // Extract user ID from XML response
-        const parsedResponse = await parseStringPromise(responseData);
-        const uid = parsedResponse?.methodResponse?.params?.[0]?.param?.[0]?.value?.[0]?.int?.[0];
-
-        if (uid) {
-            console.log('Authentication successful, user ID:', uid);
-            return parseInt(uid);
-        } else {
-            throw new Error('Failed to extract user ID from response.');
-        }
-
-    } catch (error) {
-        console.error('Authentication Error:', error.message);
-        throw new Error(`Authentication failed: ${error.message}`);
-    }
+  return new Promise((resolve, reject) => {
+    commonClient.methodCall('authenticate', [db, username, password, {}], (error, uid) => {
+      if (error) {
+        console.error('Authentication Error:', error);
+        console.error('Full Response:', error.response ? error.response.data : 'No response data available');
+        reject(`Authentication failed: ${error.message}`);
+      } else {
+        console.log('Authentication successful, user ID:', uid);
+        resolve(uid);
+      }
+    });
+  });
 }
 
-// Function to get products from Odoo using Axios
+// Function to get products from Odoo
 export async function getProducts() {
-    try {
-        const uid = await authenticate(); // Get the UID after successful authentication
+  try {
+    // Perform a version check to verify server connection
+    await checkServerVersion();
 
-        if (uid) {
-            const xmlRequest = `<?xml version="1.0"?>
-<methodCall>
-  <methodName>execute_kw</methodName>
-  <params>
-    <param><value><string>${db}</string></value></param>
-    <param><value><int>${uid}</int></value></param>
-    <param><value><string>${password}</string></value></param>
-    <param><value><string>product.template</string></value></param>
-    <param><value><string>search_read</string></value></param>
-    <param><value><array><data></data></array></value></param>
-    <param>
-      <value>
-        <struct>
-          <member>
-            <name>fields</name>
-            <value>
-              <array>
-                <data>
-                  <value><string>name</string></value>
-                  <value><string>list_price</string></value>
-                  <value><string>description</string></value>
-                  <value><string>image_1920</string></value>
-                </data>
-              </array>
-            </value>
-          </member>
-        </struct>
-      </value>
-    </param>
-  </params>
-</methodCall>`;
+    const uid = await authenticate(); // Get the UID after successful authentication
 
-            const response = await axios.post(`${url}object`, xmlRequest, {
-                headers: {
-                    'Content-Type': 'text/xml',
-                },
-            });
+    return new Promise((resolve, reject) => {
+      const params = [
+        db,
+        uid,
+        password,
+        'product.template',
+        'search_read',
+        [],
+        {
+          fields: ['name', 'list_price', 'standard_price', 'qty_available', 'categ_id'],
+          limit: 10,
+        },
+      ];
 
-            const productsData = response.data;
-
-            // Parse the XML response to extract products data
-            const parsedResponse = await parseStringPromise(productsData);
-            const productList = parsedResponse?.methodResponse?.params?.[0]?.param?.[0]?.value?.[0]?.array?.[0]?.data?.[0]?.value;
-
-            if (productList) {
-                // Process each product
-                const products = productList.map(product => {
-                    const fields = product?.struct?.[0]?.member || [];
-                    const productData = {};
-
-                    fields.forEach(field => {
-                        const name = field?.name?.[0];
-                        const value = field?.value?.[0]?.string?.[0] || field?.value?.[0]?.double?.[0] || field?.value?.[0]?.base64?.[0];
-                        if (name) {
-                            productData[name] = value;
-                        }
-                    });
-
-                    return productData;
-                });
-
-                console.log('Products:', products);
-                return products;
-            } else {
-                throw new Error('Failed to extract products from response.');
-            }
+      objectClient.methodCall('execute_kw', params, (error, products) => {
+        if (error) {
+          console.error('Error in getProducts:', error);
+          reject(`Failed to fetch products: ${error.message}`);
+        } else {
+          console.log('Products:', products);
+          resolve(products);
         }
-    } catch (error) {
-        console.error('Error in getProducts:', error.message);
-        throw error;
-    }
+      });
+    });
+  } catch (error) {
+    console.error('Error in getProducts:', error.message);
+    throw error;
+  }
 }
 
-// Function to get categories from Odoo using Axios
+// Function to get categories from Odoo
 export async function getCategories() {
-    try {
-        const uid = await authenticate(); // Get the UID after successful authentication
+  try {
+    // Perform a version check to verify server connection
+    await checkServerVersion();
 
-        if (uid) {
-            const xmlRequest = `<?xml version="1.0"?>
-<methodCall>
-  <methodName>execute_kw</methodName>
-  <params>
-    <param><value><string>${db}</string></value></param>
-    <param><value><int>${uid}</int></value></param>
-    <param><value><string>${password}</string></value></param>
-    <param><value><string>product.category</string></value></param>
-    <param><value><string>search_read</string></value></param>
-    <param><value><array><data></data></array></value></param>
-    <param>
-      <value>
-        <struct>
-          <member>
-            <name>fields</name>
-            <value>
-              <array>
-                <data>
-                  <value><string>name</string></value>
-                </data>
-              </array>
-            </value>
-          </member>
-        </struct>
-      </value>
-    </param>
-  </params>
-</methodCall>`;
+    const uid = await authenticate();
 
-            const response = await axios.post(`${url}object`, xmlRequest, {
-                headers: {
-                    'Content-Type': 'text/xml',
-                },
-            });
+    return new Promise((resolve, reject) => {
+      const params = [
+        db,
+        uid,
+        password,
+        'product.category',
+        'search_read',
+        [],
+        {
+          fields: ['name'],
+        },
+      ];
 
-            const categoriesData = response.data;
-
-            // Parse the XML response to extract categories data
-            const parsedResponse = await parseStringPromise(categoriesData);
-            const categoryList = parsedResponse?.methodResponse?.params?.[0]?.param?.[0]?.value?.[0]?.array?.[0]?.data?.[0]?.value;
-
-            if (categoryList) {
-                // Process each category
-                const categories = categoryList.map(category => {
-                    const fields = category?.struct?.[0]?.member || [];
-                    const categoryData = {};
-
-                    fields.forEach(field => {
-                        const name = field?.name?.[0];
-                        const value = field?.value?.[0]?.string?.[0];
-                        if (name) {
-                            categoryData[name] = value;
-                        }
-                    });
-
-                    return categoryData;
-                });
-
-                console.log('Categories:', categories);
-                return categories;
-            } else {
-                throw new Error('Failed to extract categories from response.');
-            }
+      objectClient.methodCall('execute_kw', params, (error, categories) => {
+        if (error) {
+          console.error('Error in getCategories:', error);
+          reject(`Failed to fetch categories: ${error.message}`);
+        } else {
+          console.log('Categories:', categories);
+          resolve(categories);
         }
-    } catch (error) {
-        console.error('Error in getCategories:', error.message);
-        throw error;
-    }
+      });
+    });
+  } catch (error) {
+    console.error('Error in getCategories:', error.message);
+    throw error;
+  }
 }

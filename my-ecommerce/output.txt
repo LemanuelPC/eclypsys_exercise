@@ -1,0 +1,280 @@
+
+> my-ecommerce@0.0.1 dev
+> vite dev --open
+
+
+  [32m[1mVITE[22m v5.4.11[39m  [2mready in [0m[1m810[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Terminate batch job (Y/N)? 
+
+> my-ecommerce@0.0.1 dev
+> vite dev --open
+
+
+  [32m[1mVITE[22m v5.4.11[39m  [2mready in [0m[1m811[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Raw Response Data: <?xml version="1.0"?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 104, in __new__
+    return cls.registries[db_name]
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 33, in __getitem__
+    a = self.d[obj]
+        ~~~~~~^^^^^
+KeyError: 'rochat_test'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py", line 161, in xmlrpc_2
+    response = self._xmlrpc(service)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py", line 139, in _xmlrpc
+    result = dispatch_rpc(service, method, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 398, in dispatch_rpc
+    return dispatch(method, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/service/common.py", line 58, in dispatch
+    return g[exp_method_name](*params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/service/common.py", line 26, in exp_authenticate
+    res_users = Registry(db)['res.users']
+                ^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 106, in __new__
+    return cls.new(db_name)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 118, in new
+    registry.init(db_name)
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 210, in init
+    with closing(self.cursor()) as cr:
+                 ^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 1007, in cursor
+    return self._db.cursor()
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 784, in cursor
+    return Cursor(self.__pool, self.__dbname, self.__dsn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 288, in __init__
+    self._cnx = pool.borrow(dsn)
+                ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 712, in borrow
+    result = psycopg2.connect(
+             ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "db" (172.18.0.2), port 5432 failed: FATAL:  database "rochat_test" does not exist
+
+</string></value>
+</member>
+</struct></value>
+</fault>
+
+</methodResponse>
+
+Parsed Response: {
+  "methodResponse": {
+    "fault": [
+      {
+        "value": [
+          {
+            "struct": [
+              {
+                "member": [
+                  {
+                    "name": [
+                      "faultCode"
+                    ],
+                    "value": [
+                      {
+                        "int": [
+                          "1"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": [
+                      "faultString"
+                    ],
+                    "value": [
+                      {
+                        "string": [
+                          "Traceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 104, in __new__\n    return cls.registries[db_name]\n           ~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/lru.py\", line 33, in __getitem__\n    a = self.d[obj]\n        ~~~~~~^^^^^\nKeyError: 'rochat_test'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py\", line 161, in xmlrpc_2\n    response = self._xmlrpc(service)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py\", line 139, in _xmlrpc\n    result = dispatch_rpc(service, method, params)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/http.py\", line 398, in dispatch_rpc\n    return dispatch(method, params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/service/common.py\", line 58, in dispatch\n    return g[exp_method_name](*params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/service/common.py\", line 26, in exp_authenticate\n    res_users = Registry(db)['res.users']\n                ^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 106, in __new__\n    return cls.new(db_name)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 118, in new\n    registry.init(db_name)\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 210, in init\n    with closing(self.cursor()) as cr:\n                 ^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 1007, in cursor\n    return self._db.cursor()\n           ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 784, in cursor\n    return Cursor(self.__pool, self.__dbname, self.__dsn)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 288, in __init__\n    self._cnx = pool.borrow(dsn)\n                ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 712, in borrow\n    result = psycopg2.connect(\n             ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/psycopg2/__init__.py\", line 122, in connect\n    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npsycopg2.OperationalError: connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  database \"rochat_test\" does not exist\n\n"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+Raw Response Data: <?xml version="1.0"?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 104, in __new__
+    return cls.registries[db_name]
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 33, in __getitem__
+    a = self.d[obj]
+        ~~~~~~^^^^^
+KeyError: 'rochat_test'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py", line 161, in xmlrpc_2
+    response = self._xmlrpc(service)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py", line 139, in _xmlrpc
+    result = dispatch_rpc(service, method, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 398, in dispatch_rpc
+    return dispatch(method, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/service/common.py", line 58, in dispatch
+    return g[exp_method_name](*params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/service/common.py", line 26, in exp_authenticate
+    res_users = Registry(db)['res.users']
+                ^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 106, in __new__
+    return cls.new(db_name)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 118, in new
+    registry.init(db_name)
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 210, in init
+    with closing(self.cursor()) as cr:
+                 ^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 1007, in cursor
+    return self._db.cursor()
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 784, in cursor
+    return Cursor(self.__pool, self.__dbname, self.__dsn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 288, in __init__
+    self._cnx = pool.borrow(dsn)
+                ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/decorator.py", line 232, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 97, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 712, in borrow
+    result = psycopg2.connect(
+             ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "db" (172.18.0.2), port 5432 failed: FATAL:  database "rochat_test" does not exist
+
+</string></value>
+</member>
+</struct></value>
+</fault>
+
+</methodResponse>
+
+Parsed Response: {
+  "methodResponse": {
+    "fault": [
+      {
+        "value": [
+          {
+            "struct": [
+              {
+                "member": [
+                  {
+                    "name": [
+                      "faultCode"
+                    ],
+                    "value": [
+                      {
+                        "int": [
+                          "1"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": [
+                      "faultString"
+                    ],
+                    "value": [
+                      {
+                        "string": [
+                          "Traceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 104, in __new__\n    return cls.registries[db_name]\n           ~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/lru.py\", line 33, in __getitem__\n    a = self.d[obj]\n        ~~~~~~^^^^^\nKeyError: 'rochat_test'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py\", line 161, in xmlrpc_2\n    response = self._xmlrpc(service)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/addons/base/controllers/rpc.py\", line 139, in _xmlrpc\n    result = dispatch_rpc(service, method, params)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/http.py\", line 398, in dispatch_rpc\n    return dispatch(method, params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/service/common.py\", line 58, in dispatch\n    return g[exp_method_name](*params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/service/common.py\", line 26, in exp_authenticate\n    res_users = Registry(db)['res.users']\n                ^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 106, in __new__\n    return cls.new(db_name)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 118, in new\n    registry.init(db_name)\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 210, in init\n    with closing(self.cursor()) as cr:\n                 ^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/modules/registry.py\", line 1007, in cursor\n    return self._db.cursor()\n           ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 784, in cursor\n    return Cursor(self.__pool, self.__dbname, self.__dsn)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 288, in __init__\n    self._cnx = pool.borrow(dsn)\n                ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/decorator.py\", line 232, in fun\n    return caller(func, *(extras + args), **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/tools/func.py\", line 97, in locked\n    return func(inst, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/odoo/sql_db.py\", line 712, in borrow\n    result = psycopg2.connect(\n             ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3/dist-packages/psycopg2/__init__.py\", line 122, in connect\n    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npsycopg2.OperationalError: connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  database \"rochat_test\" does not exist\n\n"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+Terminate batch job (Y/N)? 

@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"axios": "^1.7.7",
+		"odoo-xmlrpc": "github:faisalsami/odoo-xmlrpc",
 		"xml2js": "^0.6.2",
 		"xmlrpc": "^1.3.2"
 	}
